@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		button{
+			width: 40px;
+			height: 30px;
+			border-radius: 15px;
+			outline: none;
+			border: none;
+			background-color: rgb(255,113,0);
+		}
+		button:active{
+ 		   box-shadow: 0 0 3px 3px lightsalmon;
+		}
+		table{
+			margin-top: 30px;
+			padding: 10px;
+			border: none;
+			border-radius: 5px;
+			background-color: rgb(54,133,144);
+			box-shadow:  2px 2px 2px 2px gray;
+		}
+		td{
+			padding: 5px;
+		}
+		#show{
+			width: 186px;
+			height: 50px;
+			background-color: rgb(150,164,194);
+			outline: none;
+			border: none;
+			border-radius: 5px;
+			color: white;
+			padding-left: 5px;
+			padding-right: 5px;
+		}
+	</style>
+	<body>
+		<table align="center">
+			<tr>
+				<td colspan="5"><input type="text" name="show" id="show" value="" readonly="" /></td>
+			</tr>
+			<tr>
+				<td><button id="opLBrackets" value="(" onclick="getStr('opLBrackets')">(</button></td>
+				<td><button id="opRBrackets" value=")" onclick="getStr('opRBrackets')">)</button></td>
+				<td><button id="opCE" value="CE" onclick="getStr('opCE')">CE</button></td>
+				<td><button id="opAC" value="AC" onclick="getStr('opAC')">AC</button></td>
+			</tr>
+			<tr>
+				<td><button id="num7" value="7" onclick="getStr('num7')">7</button></td>
+				<td><button id="num8" value="8" onclick="getStr('num8')">8</button></td>
+				<td><button id="num9" value="9" onclick="getStr('num9')">9</button></td>
+				<td><button id="opDivide" value="/" onclick="getStr('opDivide')">/</button></td>
+			</tr>
+			<tr>
+				<td><button id="num4" value="4" onclick="getStr('num4')">4</button></td>
+				<td><button id="num5" value="5" onclick="getStr('num5')">5</button></td>
+				<td><button id="num6" value="6" onclick="getStr('num6')">6</button></td>
+				<td><button id="opMultiply" value="*" onclick="getStr('opMultiply')">×</button></td>
+			</tr>
+			<tr>
+				<td><button id="num1" value="1" onclick="getStr('num1')">1</button></td>
+				<td><button id="num2" value="2" onclick="getStr('num2')">2</button></td>
+				<td><button id="num3" value="3" onclick="getStr('num3')">3</button></td>
+				<td><button id="opSubtract" value="-" onclick="getStr('opSubtract')">-</button></td>
+			</tr>
+			<tr>
+				<td><button id="num0" value="0" onclick="getStr('num0')">0</button></td>
+				<td><button id="opPoint" value="." onclick="getStr('opPoint')">.</button></td>
+				<td><button id="opEqual" value="=" onclick="getStr('opEqual')">=</button></td>
+				<td><button id="opAdd" value="+" onclick="getStr('opAdd')">+</button></td>
+			</tr>
+		</table>
+	</body>
+	<script type="text/javascript">
+		var showString = '';
+		var result = '';
+
+		function getStr(id) {
+			var c = document.getElementById(id).value;
+			if(c == 'AC') {
+				showString = '';
+				result = '';
+				document.getElementById("show").value = showString;
+			} else if(c == 'CE') {
+				if(result == '') {
+					showString = showString.substring(0, showString.length - 1);
+					document.getElementById("show").value = showString;
+				}
+			} else if(c == '=') {
+				if(showString == '') {} else {
+					try {
+						result = eval(showString);
+					} catch(err) {
+						alert('算式格式错误');
+						document.getElementById("show").value = '';
+					}
+					document.getElementById("show").value = result;
+					showString = result;
+					result = '';
+				}
+
+			} else {
+				showString += c;
+				document.getElementById("show").value = showString;
+			}
+		}
+	</script>
+
+</html>
